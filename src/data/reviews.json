@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "stars": 5,
+    "name": "Sarah Mitchell",
+    "description": "Best massage I've had in years! The therapist really knew how to work out all my knots. The atmosphere is so relaxing and peaceful. I left feeling like a new person.",
+    "isFeatured": true
+  },
+  {
+    "id": 2,
+    "stars": 5,
+    "name": "Michael Rodriguez",
+    "description": "I've been coming here for months and every session is incredible. They really take the time to understand your needs and customize the massage. Highly recommend for anyone dealing with chronic pain.",
+    "isFeatured": true
+  },
+  {
+    "id": 3,
+    "stars": 5,
+    "name": "Jennifer Thompson",
+    "description": "Clean, professional, and the massage was exactly what I needed. The deep tissue work was perfect for my lower back issues. Will definitely be back!",
+    "isFeatured": true
+  },
+  {
+    "id": 4,
+    "stars": 5,
+    "name": "David Chen",
+    "description": "My wife and I did the couples massage for our anniversary and it was amazing. Such a relaxing experience and the staff made us feel so welcome. Great value too!",
+    "isFeatured": true
+  },
+  {
+    "id": 5,
+    "stars": 5,
+    "name": "Amanda Williams",
+    "description": "I was skeptical at first but this place exceeded all my expectations. The prenatal massage was gentle yet effective. The therapist was knowledgeable and made me feel completely comfortable.",
+    "isFeatured": true
+  },
+  {
+    "id": 6,
+    "stars": 5,
+    "name": "Robert Johnson",
+    "description": "Professional service from start to finish. The sports massage helped tremendously with my training recovery. The therapist really understands athletic needs.",
+    "isFeatured": true
+  },
+  {
+    "id": 7,
+    "stars": 5,
+    "name": "Lisa Anderson",
+    "description": "I come here monthly and it's always the highlight of my month. The relaxation massage is pure bliss. The hot stones are an amazing addition. Can't recommend enough!",
+    "isFeatured": true
+  },
+  {
+    "id": 8,
+    "stars": 5,
+    "name": "Christopher Davis",
+    "description": "Had severe shoulder tension from desk work and after just one session I felt so much relief. The therapist took time to explain what they were doing and gave me tips for at home. Five stars!",
+    "isFeatured": true
+  },
+  {
+    "id": 9,
+    "stars": 5,
+    "name": "Emily Martinez",
+    "description": "The atmosphere is so calming and the massage was incredible. I appreciated how they checked in about pressure throughout. Left feeling completely relaxed and rejuvenated.",
+    "isFeatured": true
+  },
+  {
+    "id": 10,
+    "stars": 5,
+    "name": "James Wilson",
+    "description": "Best therapeutic massage in the area. I've tried several places and this is hands down the best. The combination of technique and professionalism is unmatched. Already booked my next appointment!",
+    "isFeatured": false
+  }
+]

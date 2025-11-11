@@ -1,16 +1,360 @@
 ---
+import InternalHero from "@/components/InternalHero.astro";
+import MainHero from "@/components/MainHero.astro";
+import Layout from "@/layouts/Layout.astro";
+import LoadingScreen from "@/components/LoadingScreen.astro";
 
+// Images
+import heroBG from "@/assets/heroBG.jpg";
+import hero from "@/assets/hero.jpg";
+import shop from "@/assets/shop.jpg";
+import mm1 from "@/assets/mm-1.jpg";
+import mm2 from "@/assets/mm-2.jpg";
+import mm3 from "@/assets/mm-3.jpg";
+import mmLogo from "@/assets/mm-logo.png";
+import giftcard from "@/assets/giftcard.jpg";
+
+// ICONS
+import spa from "@/assets/spa.svg";
+
+import Links from "@/components/Links.astro";
+import Heading from "@/components/Heading.astro";
+import SplitOverlay from "@/components/SplitOverlay.astro";
+import FullOverlay from "@/components/FullOverlay.astro";
+import ScrollingMarquee from "@/components/ScrollingMarquee.astro";
+import ScrollingText from "@/components/ScrollingText.astro";
+
+// REVIEWS DATA
+import { getCollection } from "astro:content";
+import ReviewsCard from "@/components/ReviewsCard.astro";
+import { baseData } from "@/data/siteData";
+
+const reviews = await getCollection("reviews", ({ data }) => data.isFeatured);
+
+// Services data
+const services = [
+  {
+    name: "Personalized Massage",
+    description:
+      "Tailored pressure and technique for your individual needs - choose from 30 to 120 minutes to release stress and improve flexibility.",
+    link: "/services/personalized-massage",
+    linkText: "Learn More",
+    image: mm1.src,
+    imageAlt: "Personalized massage therapy session tailored to individual needs",
+  },
+  {
+    name: "Couples Massage",
+    description:
+      "Share the experience with a partner or friend in a relaxing, private setting. Perfect for anniversaries or just because.",
+    link: "/services/couples-massage",
+    linkText: "Learn More",
+    image: mm2.src,
+    imageAlt: "Couples massage in a relaxing private setting",
+  },
+  {
+    name: "Special Treatments",
+    description:
+      "Prenatal, reflexology, sports stretch, and cold stone jade facial therapies that target specific goals for complete balance.",
+    link: "/services",
+    linkText: "Explore All Services",
+    image: mm3.src,
+    imageAlt: "Special massage treatments including prenatal and reflexology",
+  },
+];
+
+// Data for "benefits" section
+const benefits = [
+  {
+    title: "Relieves Muscle Tension and Pain",
+    description:
+      "Whether from work, workouts, or stress, tight muscles can cause pain and limit mobility. Massage breaks up tension and releases built-up lactic acid, helping your body move and feel better.",
+    icon: spa.src,
+  },
+  {
+    title: "Improves Circulation",
+    description:
+      "By stimulating blood flow, massage delivers more oxygen and nutrients to your muscles and tissues. This natural boost helps the body heal faster and function more efficiently.",
+    icon: spa.src,
+  },
+  {
+    title: "Reduces Stress and Anxiety",
+    description:
+      "Massage lowers cortisol (the stress hormone) and increases serotonin and dopamine - your feel-good chemicals. The result is a calmer mind, reduced anxiety, and a lasting sense of balance.",
+    icon: spa.src,
+  },
+  {
+    title: "Enhances Flexibility and Range of Motion",
+    description:
+      "Regular massage keeps joints and connective tissues supple, helping prevent stiffness and improving overall mobility - especially beneficial for athletes or anyone with a sedentary lifestyle.",
+    icon: spa.src,
+  },
+  {
+    title: "Improves Sleep Quality",
+    description:
+      "The relaxation effect of massage extends well beyond your session. Calmer nerves and relaxed muscles help you fall asleep faster and enjoy deeper, more restorative rest.",
+    icon: spa.src,
+  },
+  {
+    title: "Boosts Immune Function",
+    description:
+      "Massage increases lymphatic flow, helping the body remove toxins and strengthen the immune response. It's a simple way to keep your system resilient year-round.",
+    icon: spa.src,
+  },
+  {
+    title: "Aids in Post-Workout Recovery",
+    description:
+      "Massage reduces soreness and inflammation after physical activity. It speeds up muscle repair and helps you recover quicker between workouts or busy workdays.",
+    icon: spa.src,
+  },
+  {
+    title: "Promotes Mental Clarity",
+    description:
+      "The mind often mirrors the body. When tension is released physically, you naturally experience greater focus, improved mood, and mental clarity.",
+    icon: spa.src,
+  },
+];
+
+// Array of carousel images
+const marqueeImages = [
+  { src: mm1, alt: "Perfect Pair" },
+  { src: mm2, alt: "Cocktail" },
+  { src: mm3, alt: "Torch" },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<LoadingScreen backgroundImage={heroBG} logoImage={mmLogo} />
+
+<Layout title="Home">
+  <MainHero
+    pageTitle="Monroe Massage"
+    title="Relax. Rejuvenate. Renew in Downtown Monroe."
+    subtitle="Personalized massage therapy designed to restore your body and mind. Whether you're recovering from tension, stress, or simply need a break - our licensed therapists are here to help you feel your best."
+    imageSrc={hero}
+    ariaLabel="Hero section with business hours scrolling text"
+    classes="hero--internal"
+  >
+    <Links variant="primary" href="/get-a-quote" slot="btn">Get A Quote</Links>
+  </MainHero>
+
+  <SplitOverlay
+    title="Locally Owned. Family Operated. Always Personal."
+    eyebrow="Why Choose Us"
+    imgSrc={shop}
+    imgAlt="Massage therapist providing a relaxing massage to a client."
+    orientation="right"
+  >
+    <p>
+      Located in the heart of downtown Monroe, our studio was built on the belief that massage
+      therapy should be both effective and enjoyable. Our therapists bring years of experience and
+      genuine care to every session, ensuring each visit leaves you feeling better than when you
+      arrived.
+    </p>
+    <Links variant="light" href="/about">Meet Our Team</Links>
+  </SplitOverlay>
+
+  <ScrollingText>
+    <Heading tag="h2" size="m" fontFamily="secondary" marginBottom="none" weight="fw500">
+      {baseData.address.full}
+    </Heading>
+    <Heading tag="h2" size="m" fontFamily="secondary" marginBottom="none" weight="fw500">
+      {baseData.hours.weekday.days}: {baseData.hours.weekday.hours}
+    </Heading>
+    <Heading tag="h2" size="m" fontFamily="secondary" marginBottom="none" weight="fw500">
+      {baseData.hours.saturday.days}: {baseData.hours.saturday.hours}
+    </Heading>
+    <Heading tag="h2" size="m" fontFamily="secondary" marginBottom="none" weight="fw500">
+      {baseData.hours.sunday.days}: {baseData.hours.sunday.hours}
+    </Heading>
+  </ScrollingText>
+
+  <section>
+    <div class="container container-lg column-main">
+      <div class="content-md">
+        <Heading
+          tag="h2"
+          size="xs"
+          fontFamily="secondary"
+          marginBottom="s"
+          weight="fw500"
+          class="eyebrow">Our Services</Heading
+        >
+        <Heading tag="h3" size="display" fontFamily="primary" marginBottom="m" weight="fw500"
+          >Personalized Care for Your Wellness</Heading
+        >
+        <p>
+          Experience personalized care designed to meet your unique wellness needs. From relaxation
+          to recovery, our licensed massage therapists are here to help you feel your best.
+        </p>
+      </div>
+      <div class="content-full">
+        <div class="services">
+          {
+            services.map(service => (
+              <div class="services__card">
+                <div class="services__img-wrapper">
+                  <img src={service.image} alt={service.imageAlt} />
+                </div>
+                <div class="services__content">
+                  <Heading tag="h4" size="l" fontFamily="primary" marginBottom="s" weight="fw500">
+                    {service.name}
+                  </Heading>
+                  <p>{service.description}</p>
+                  <Links variant="primary" href={service.link}>
+                    {service.linkText}
+                  </Links>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MASSAGE BENEFITS -->
+  <section id="benefits" class="bg-primary-light">
+    <div class="container container-md column-main">
+      <div class="content-md">
+        <Heading
+          tag="h2"
+          size="xs"
+          fontFamily="secondary"
+          marginBottom="s"
+          weight="fw500"
+          class="eyebrow">The Benefits</Heading
+        >
+        <Heading tag="h3" size="display" fontFamily="primary" marginBottom="m" weight="fw500"
+          >Why Massage Therapy Works</Heading
+        >
+        <p>
+          Massage therapy is more than relaxation-it's a proven way to improve your physical and
+          mental well-being. Here's how it helps your body heal, restore, and thrive.
+        </p>
+        <Links variant="primary" href="/contact">Book Your Massage Today</Links>
+      </div>
+      <div class="content-full">
+        <div class="card-grid grid-auto-4">
+          {
+            benefits.map(item => (
+              <div class="card bg-light">
+                <span class="icon">
+                  <img src={item.icon} alt="" />
+                </span>
+                <div class="card__content">
+                  <Heading tag="h3" size="m" fontFamily="primary" marginBottom="s" weight="fw500">
+                    {item.title}
+                  </Heading>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFT CARDS -->
+  <FullOverlay
+    backgroundImage={giftcard}
+    eyebrow="Gift Cards"
+    heading="Gift the Gift of Relaxation"
+  >
+    <p>
+      Surprise someone special with the perfect self-care experience. Gift cards are available in
+      any amount and can be used toward any massage or treatment.
+    </p>
+    <Links variant="outline-light" href="/gift-cards">Purchase Gift Cards</Links>
+  </FullOverlay>
+
+  <ScrollingMarquee items={marqueeImages} />
+
+  <section>
+    <div class="container container-md">
+      <div class="content-md">
+        <Heading
+          tag="h2"
+          size="xs"
+          fontFamily="secondary"
+          marginBottom="s"
+          weight="fw500"
+          class="eyebrow"
+        >
+          Testimonials
+        </Heading>
+        <Heading tag="h3" size="display" fontFamily="primary" marginBottom="m" weight="fw500">
+          What Our Clients Are Saying
+        </Heading>
+      </div>
+      <div class="content-lg">
+        <div class="reviews-grid">
+          {reviews.map(review => <ReviewsCard reviews={review} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss" is:global>
+  .scroll-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    white-space: nowrap;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+      flex-shrink: 0;
+    }
+  }
+
+  .reviews-grid {
+    column-count: 3;
+    column-gap: 1rem;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+
+    @media (max-width: 1024px) {
+      column-count: 2;
+    }
+
+    @media (max-width: 768px) {
+      column-count: 1;
+    }
+
+    .card {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  .services {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+
+    &__card {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      background: var(--light-100);
+      padding: 0.5rem;
+      border-radius: var(--border-radius-small);
+      gap: 1rem;
+    }
+
+    &__img-wrapper {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      overflow: hidden;
+      object-fit: cover;
+    }
+  }
+</style>

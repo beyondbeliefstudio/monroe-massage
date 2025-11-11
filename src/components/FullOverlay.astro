@@ -1,0 +1,88 @@
+---
+import Heading from "./Heading.astro";
+import type { ImageMetadata } from "astro";
+
+export interface Props {
+  backgroundImage: string | ImageMetadata;
+  eyebrow?: string;
+  heading?: string;
+  bgOpacity?: number;
+  overlayOpacity?: number;
+}
+
+const { backgroundImage, eyebrow, heading } = Astro.props;
+
+const bgImage = typeof backgroundImage === "string" ? backgroundImage : backgroundImage.src;
+---
+
+<section class="full-overlay">
+  <div class="full-overlay__bg" style={`background-image: url(${bgImage});`}></div>
+  <div class="full-overlay__overlay"></div>
+  <div class="container container-md">
+    <div class="content-md full-overlay__content">
+      <Heading
+        tag="h2"
+        size="xs"
+        fontFamily="secondary"
+        marginBottom="s"
+        weight="fw500"
+        class="eyebrow"
+      >
+        {eyebrow}
+      </Heading>
+      <Heading tag="h3" size="display" fontFamily="primary" marginBottom="l" weight="fw500">
+        {heading}
+      </Heading>
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style lang="scss" is:global>
+  .full-overlay {
+    position: relative;
+    padding: 6rem 0;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    .eyebrow {
+      color: var(--dark-800);
+      background-color: var(--light-200);
+    }
+
+    &__bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: 0;
+      opacity: 0.3;
+    }
+
+    &__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgb(26 36 29);
+      mix-blend-mode: lighten;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    &__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--light-200);
+
+      h2,
+      h3,
+      h4,
+      p {
+        color: var(--light-200);
+      }
+    }
+  }
+</style>

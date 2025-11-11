@@ -1,0 +1,74 @@
+---
+import Heading from "@/components/Heading.astro";
+
+import type { HTMLAttributes } from "astro/types";
+
+export interface HeroProps extends HTMLAttributes<"section"> {
+  pageTitle?: string;
+  title: string;
+  subtitle?: string;
+  ariaLabel?: string;
+  classes?: string;
+}
+
+const { pageTitle, title, subtitle, ariaLabel, classes, ...rest } = Astro.props;
+---
+
+<section class:list={["hero", classes]} aria-label={ariaLabel} {...rest}>
+  <div class="container container-md hero__container">
+    <div class="column column-main flex-1">
+      <div class="content-md">
+        <Heading
+          tag="h1"
+          size="xs"
+          fontFamily="primary"
+          marginBottom="m"
+          weight="fw500"
+          class="hero__title card__glass">{pageTitle}</Heading
+        >
+        <Heading tag="h2" size="xxl" fontFamily="primary" marginBottom="l" weight="fw500"
+          >{title}</Heading
+        >
+        <p class="large">
+          {subtitle}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .hero {
+    overflow: hidden;
+    position: relative;
+    padding-top: 124px;
+
+    &__container {
+      padding-top: var(--_spacing---section-space--xl);
+      padding-bottom: var(--_spacing---section-space--xl);
+    }
+
+    .img-wrapper {
+      width: 100%;
+      border-radius: var(--border-radius-medium);
+      overflow: hidden;
+      height: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    .column {
+      position: relative;
+      z-index: 999;
+    }
+
+    &__title {
+      width: fit-content;
+      margin-left: auto;
+      /* text-transform: uppercase; */
+      letter-spacing: 0px;
+      padding: 0.5rem;
+      border-radius: 5px;
+      margin-right: auto;
+    }
+  }
+</style>

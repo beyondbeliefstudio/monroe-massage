@@ -1,0 +1,68 @@
+---
+
+---
+
+<section class="bg-primary-light">
+  <div class="scrolling-text">
+    <div class="scrolling-text-inner">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  /* SCROLLING TEXT */
+  .scrolling-text {
+    max-width: 100%;
+    width: fit-content;
+    margin: auto;
+    overflow: hidden;
+    color: var(--dark-800);
+
+    &-inner {
+      margin: 0;
+      padding: 1rem 0;
+      list-style: none;
+      display: flex;
+      gap: 5rem;
+      width: max-content;
+      flex-wrap: nowrap;
+      animation: scrollText 90s forwards linear infinite;
+    }
+  }
+
+  @keyframes scrollText {
+    to {
+      transform: translate(calc(-50% - 2.5rem));
+    }
+  }
+</style>
+
+<script>
+  const scrollText: NodeListOf<HTMLElement> =
+    document.querySelectorAll<HTMLElement>(".scrolling-text");
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    scrollingText();
+  }
+
+  function scrollingText(): void {
+    scrollText.forEach((scroller: HTMLElement) => {
+      scroller.setAttribute("data-animated", "true");
+
+      const scrollTextInner: HTMLElement | null =
+        scroller.querySelector<HTMLElement>(".scrolling-text-inner");
+      if (scrollTextInner) {
+        const scrollContent: HTMLElement[] = Array.from(scrollTextInner.children) as HTMLElement[];
+
+        for (let i = 0; i < 3; i++) {
+          scrollContent.forEach((item: HTMLElement) => {
+            const duplicatedItem: HTMLElement = item.cloneNode(true) as HTMLElement;
+            duplicatedItem.setAttribute("aria-hidden", "true");
+            scrollTextInner.appendChild(duplicatedItem);
+          });
+        }
+      }
+    });
+  }
+</script>

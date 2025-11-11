@@ -1,0 +1,68 @@
+---
+// Content
+import Heading from "@/components/Heading.astro";
+import type { CollectionEntry } from "astro:content";
+
+// Components
+type Props = { reviews: CollectionEntry<"reviews"> };
+
+const { reviews } = Astro.props;
+
+const { description, name, stars } = reviews.data;
+---
+
+<li class="card bg-white">
+  <div class="stars" data-rating={stars}>
+    {Array.from({ length: 5 }, (_, i) => <span class={i < stars ? "star filled" : "star"} />)}
+  </div>
+  <p class="review">{description}</p>
+  <Heading tag="h3" size="s" fontFamily="primary" marginBottom="xs" weight="fw500">{name}</Heading>
+</li>
+
+<style lang="scss">
+  li {
+    height: fit-content;
+    max-width: 500px;
+    cursor: pointer;
+    align-items: start;
+
+    @media screen and (max-width: 768px) {
+      max-width: 350px;
+    }
+
+    .review {
+      margin-bottom: 1rem;
+    }
+  }
+  span.stars {
+    display: block;
+    margin: 0 0 0.5rem;
+    letter-spacing: 5px;
+    font-size: 1.15rem;
+    font-family: Arial, sans-serif;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .star {
+    width: 1rem;
+    height: 1rem;
+    position: relative;
+
+    &::before {
+      content: "\2606";
+      position: absolute;
+      font-size: 0.95rem;
+      color: #ddd;
+    }
+
+    &.filled::before {
+      content: "\2605";
+      color: var(--dark-800);
+    }
+  }
+</style>

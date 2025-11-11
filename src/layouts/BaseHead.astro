@@ -1,0 +1,29 @@
+---
+import { baseData } from "@/data/siteData";
+import Analytics from "@/components/Analytics.astro";
+
+const { title = baseData.title, description = baseData.description } = Astro.props;
+const GA_MEASUREMENT_ID = "xxx";
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="shortcut icon" type="image/svg" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <title>Monroe Massage | {title}</title>
+  <meta name="description" content={description} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap"
+    rel="preload"
+    as="style"
+    onload="this.rel='stylesheet'"
+  />
+  <script src="@/js/app.js"></script>
+
+  <Analytics measurementId={GA_MEASUREMENT_ID} />
+</head>

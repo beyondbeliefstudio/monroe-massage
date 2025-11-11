@@ -1,0 +1,137 @@
+---
+import { Image, Picture } from "astro:assets";
+import Heading from "./Heading.astro";
+
+const { items } = Astro.props;
+---
+
+<section>
+  <div class="container container-md">
+    <div class="content-md">
+      <Heading
+        tag="h2"
+        size="xs"
+        fontFamily="secondary"
+        marginBottom="s"
+        weight="fw500"
+        class="eyebrow">Our Space</Heading
+      >
+      <Heading tag="h3" size="xl" fontFamily="primary" marginBottom="m" weight="fw500">
+        Designed for comfort. Built for calm.
+      </Heading>
+      <p>
+        Before your first session, you should know exactly where you're coming to unwind. Our studio
+        was thoughtfully designed to help you relax the moment you walk through the door. Warm
+        lighting, soft textures, and a peaceful atmosphere make every visit feel like an escape.
+      </p>
+
+      <p>
+        We've created an environment that blends professionalism with tranquility - quiet rooms,
+        soothing aromas, and a welcoming staff that puts your comfort first. Whether you're here for
+        deep recovery or gentle relaxation, our space sets the tone for an experience that feels
+        personal and restorative.
+      </p>
+    </div>
+  </div>
+  <div class="scrolling-photos">
+    <div class="scrolling-photos__inner">
+      {
+        items.map((item: { src: string; alt?: string; id?: string; imgText?: string }) => (
+          <div class="scrolling-photos__item">
+            <div class="scrolling-photos__img-wrapper">
+              <Picture
+                src={item.src}
+                alt={item.alt ?? null}
+                class="scrolling-photos__img"
+                id={item.id}
+                loading="eager"
+                width={2000}
+                height={1000}
+              />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  /* SCROLLING PHOTOS MARQUEE */
+  .scrolling-photos {
+    max-width: 100%;
+    width: fit-content;
+    margin: auto;
+    overflow: hidden;
+    background-color: var(--light-200);
+
+    &__inner {
+      margin: 0;
+      padding: 1rem 0;
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      flex-wrap: nowrap;
+      animation: scrollPhotos 80s reverse linear infinite;
+    }
+
+    &__item {
+      position: relative;
+    }
+
+    &__img-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: var(--border-radius-small);
+
+      img {
+        height: 500px;
+        width: fit-content !important;
+        object-fit: cover;
+        vertical-align: middle;
+        display: inline-block;
+        aspect-ratio: auto;
+      }
+    }
+  }
+
+  @keyframes scrollPhotos {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+</style>
+
+<script>
+  const scrollPhotos: NodeListOf<HTMLElement> =
+    document.querySelectorAll<HTMLElement>(".scrolling-photos");
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    scrollingPhotos();
+  }
+
+  function scrollingPhotos(): void {
+    scrollPhotos.forEach((scroller: HTMLElement) => {
+      scroller.setAttribute("data-animated", "true");
+
+      const scrollPhotosInner: HTMLElement | null = scroller.querySelector<HTMLElement>(
+        ".scrolling-photos__inner"
+      );
+      if (scrollPhotosInner) {
+        const scrollContent: HTMLElement[] = Array.from(
+          scrollPhotosInner.children
+        ) as HTMLElement[];
+
+        for (let i = 0; i < 3; i++) {
+          scrollContent.forEach((item: HTMLElement) => {
+            const duplicatedItem: HTMLElement = item.cloneNode(true) as HTMLElement;
+            duplicatedItem.setAttribute("aria-hidden", "true");
+            scrollPhotosInner.appendChild(duplicatedItem);
+          });
+        }
+      }
+    });
+  }
+</script>

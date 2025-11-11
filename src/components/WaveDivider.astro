@@ -1,0 +1,48 @@
+---
+export interface WaveDividerProps {
+  fillColor?: string;
+  position?: "top" | "bottom";
+}
+
+const { fillColor = "var(--light-200)", position = "bottom" } = Astro.props;
+---
+
+<div class:list={["wave-divider", `wave-divider--${position}`]}>
+  <svg
+    viewBox="0 0 1440 120"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
+      fill={fillColor}></path>
+  </svg>
+</div>
+
+<style lang="scss">
+  .wave-divider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    line-height: 0;
+    z-index: 2;
+
+    &--bottom {
+      bottom: -1px;
+      transform: rotate(0deg);
+    }
+
+    &--top {
+      top: -1px;
+      transform: rotate(180deg);
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+</style>

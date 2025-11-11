@@ -1,0 +1,21 @@
+---
+// Components
+import BaseHead from "@/layouts/BaseHead.astro";
+import Footer from "@/layouts/Footer.astro";
+import Nav from "@/layouts/Nav.astro";
+
+// Styles
+import "@/styles/global.scss";
+---
+
+<!doctype html>
+<html lang="en">
+  <BaseHead {...Astro.props} />
+  <body style="overflow: hidden;">
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
