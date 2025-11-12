@@ -8,11 +8,11 @@ export const navData = [
     href: "/services",
   },
   {
-    title: "Catalog",
-    href: "/catalog",
+    title: "Gallery",
+    href: "/gallery",
   },
   {
-    title: "Blog",
-    href: "/blog",
+    title: "Gift Cards",
+    href: "/gift-cards",
   },
 ];
